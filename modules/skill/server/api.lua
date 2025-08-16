@@ -1,4 +1,4 @@
-local rules = require 'server/rules'
+local rules = require 'modules/skill/server/rules'
 local DB = require 'core/db'
 local Co = require 'core/coalesce'
 
