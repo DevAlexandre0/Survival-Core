@@ -12,7 +12,7 @@ end
 
 local function onUseItem(name, cb)
   if GetResourceState('ox_inventory') == 'started' then
-    exports.ox_inventory:registerUsableItem(name, function(src, item, data)
+    exports.ox_inventory:RegisterUsableItem(name, function(src, item, data)
       local ok, err = pcall(cb, src, item, data)
       if not ok then print('[SB][useitem] error:', err) end
     end)
