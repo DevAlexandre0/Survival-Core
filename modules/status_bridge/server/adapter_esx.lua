@@ -11,8 +11,37 @@ local function tryGetESX()
 end
 
 local function onUseItem(name, cb)
-  if GetResourceState('ox_inventory') == 'started' then
-    exports.ox_inventory:RegisterUsableItem(name, function(src, item, data)
+  if GetResourceState('ox_inventory') ~= 'started' then return end
+
+  local ox = exports.ox_inventory
+  if not ox then return end
+
+  -- Prefer hooking when available for broader version compatibility
+  if ox.registerHook then
+    local hook = setmetatable({}, {
+      __call = function(_, payload)
+        local src = payload.source or payload.playerId
+        local item = payload.item or payload.name
+        local ok, err = pcall(cb, src, item, payload)
+        if not ok then print('[SB][useitem] error:', err) end
+        return true
+      end
+    })
+    ox:registerHook('useItem', hook, { item = name })
+    return
+  end
+
+  local register = ox.RegisterUseableItem or ox.CreateUseableItem or ox.CreateUsableItem
+  if register then
+    register(ox, name, function(a, b, c)
+      local src, item, data
+      if type(a) == 'table' then
+        data = a
+        src = a.source or a.playerId
+        item = a.item or b
+      else
+        src, item, data = a, b, c
+      end
       local ok, err = pcall(cb, src, item, data)
       if not ok then print('[SB][useitem] error:', err) end
     end)
