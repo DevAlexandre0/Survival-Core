@@ -18,17 +18,17 @@ if GetResourceState('ox_inventory') ~= 'started' then return end
 
   -- Prefer hooking when available for broader version compatibility
   if ox.registerHook then
-    local hook = setmetatable({}, {
-      __call = function(_, payload)
-        local src = payload.source or payload.playerId
-        local item = payload.item or payload.name
-        local ok, err = pcall(cb, src, item, payload)
-        if not ok then print('[SB][useitem] error:', err) end
-        return true
-      end
-    })
-    ox:registerHook('useItem', hook, { item = name })
-    return
+    local hook = function(payload)
+      local src = payload.source or payload.playerId
+      local item = payload.item or payload.name
+      local ok, err = pcall(cb, src, item, payload)
+      if not ok then print('[SB][useitem] error:', err) end
+      return true
+    end
+
+    -- If hook registration fails for any reason, fall back to legacy behaviour
+    local ok = pcall(ox.registerHook, ox, 'useItem', hook, { item = name })
+    if ok then return end
   end
 
   local register = ox.RegisterUseableItem or ox.CreateUseableItem or ox.CreateUsableItem
