@@ -1,5 +1,5 @@
-local zones = require 'server/zones'
-local res   = require 'server/resources'
+local zones = require 'modules/worldengine/server/zones'
+local res   = require 'modules/worldengine/server/resources'
 
 CreateThread(function()
   if not WORLD_CFG.enabled then return end

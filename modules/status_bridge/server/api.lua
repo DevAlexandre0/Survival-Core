@@ -1,8 +1,8 @@
 local adapters = {
-  esx = require 'server/adapters/esx',
-  qb  = require 'server/adapters/qb',
-  ox  = require 'server/adapters/ox',
-  standalone = require 'server/adapters/standalone',
+  esx = require 'modules/status_bridge/server/adapters/esx',
+  qb  = require 'modules/status_bridge/server/adapters/qb',
+  ox  = require 'modules/status_bridge/server/adapters/ox',
+  standalone = require 'modules/status_bridge/server/adapters/standalone',
 }
 
 local activeAdapter = nil
