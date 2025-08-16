@@ -1,5 +1,5 @@
 ---@class Wound { kind: 'cut'|'bruise'|'fracture'|'burn', sev: 1|2|3, bleeding: boolean, dirty: boolean }
----@class Sickness { key: 'flu'|'food'|'cholera', until: number }
+---@class Sickness { key: 'flu'|'food'|'cholera', expires: number }
 ---@class Effects { pain:number, shock:number, fever:number, buffs:table<string,number> }
 
 ---@class MedState
