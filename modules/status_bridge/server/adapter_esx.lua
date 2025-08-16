@@ -12,10 +12,22 @@ end
 
 local function onUseItem(name, cb)
   if GetResourceState('ox_inventory') == 'started' then
-    exports.ox_inventory:RegisterUsableItem(name, function(src, item, data)
-      local ok, err = pcall(cb, src, item, data)
-      if not ok then print('[SB][useitem] error:', err) end
-    end)
+    local ox = exports.ox_inventory
+    local register = ox and (ox.RegisterUseableItem or ox.CreateUseableItem or ox.CreateUsableItem)
+    if register then
+      register(ox, name, function(a, b, c)
+        local src, item, data
+        if type(a) == 'table' then
+          data = a
+          src = a.source or a.playerId
+          item = a.item or b
+        else
+          src, item, data = a, b, c
+        end
+        local ok, err = pcall(cb, src, item, data)
+        if not ok then print('[SB][useitem] error:', err) end
+      end)
+    end
   end
 end
 
