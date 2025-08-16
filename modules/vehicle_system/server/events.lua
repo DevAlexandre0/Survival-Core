@@ -1,0 +1,5 @@
+-- Compatibility aliases (mechanic:/vehicle: -> vehicleSystem:)
+AddEventHandler('mechanic:inspect', function() TriggerEvent('vehicleSystem:inspect') end)
+AddEventHandler('mechanic:repair', function(part, lvl) TriggerEvent('vehicleSystem:repair', part, lvl) end)
+AddEventHandler('vehicle:inspect', function() TriggerEvent('vehicleSystem:inspect') end)
+AddEventHandler('vehicle:repair', function(part, lvl) TriggerEvent('vehicleSystem:repair', part, lvl) end)

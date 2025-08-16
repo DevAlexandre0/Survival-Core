@@ -1,0 +1,1 @@
+local M={}; function M.computeXP(evt,payload) if evt=='run_tick' then return 'stamina',1 elseif evt=='melee_hit' then return 'melee',4 elseif evt=='drive_tick' then return 'driving',1 elseif evt=='cook_done' then return 'cooking',12 elseif evt=='fish_catch' then return 'fishing',10 end return nil,0 end; return M

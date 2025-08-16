@@ -1,0 +1,1 @@
+local M={}; function M.newState(id,model) return { id=id, model=model, parts={ engine=90, tires=90, brakes=90, transmission=90, battery=90, filter=90, suspension=90 }, heat=70.0, fluids={ fuel=0, oil=100, coolant=100 }, lastKm=0.0, locked=false } end; return M

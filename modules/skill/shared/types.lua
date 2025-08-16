@@ -1,0 +1,2 @@
+---@class SkillEntry { xp:number, rank:0|1|2|3 }
+---@class SkillSnapshot { [string]: SkillEntry }

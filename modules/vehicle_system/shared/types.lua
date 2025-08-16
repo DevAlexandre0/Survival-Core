@@ -1,0 +1,10 @@
+---@class VehParts { engine:number, tires:number, brakes:number, transmission:number, battery:number, filter:number, suspension:number }
+---@class VehFluids { fuel:number, oil:number, coolant:number }
+---@class VehState
+---@field id string         -- plate|net:<id>
+---@field model string
+---@field parts VehParts    -- 0..100 (สภาพ)
+---@field heat number       -- °C
+---@field fluids VehFluids
+---@field lastKm number
+---@field locked boolean

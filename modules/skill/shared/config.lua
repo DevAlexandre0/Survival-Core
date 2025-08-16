@@ -1,0 +1,1 @@
+SKILL_CFG={ enabled=true, keys={'stamina','melee','driving','fishing','cooking'}, xp_curve={ bands={100,300,800} }, daily_dr={ enable=true, base=1.0, min_mult=0.25, decay_per_award=0.02 }, rate_limit={ per_key_per_min=18, per_player_per_min=50 } }

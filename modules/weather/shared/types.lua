@@ -1,0 +1,13 @@
+---@class Ambient
+---@field tempC number
+---@field wind number
+---@field precip number
+---@field humidity number
+---@field cloud number
+---@field weather string
+
+---@class WeatherState
+---@field mode 'own'|'follow'|'locked'
+---@field active string        -- preset key
+---@field nextAt number        -- GameTimer ms
+---@field ambient Ambient

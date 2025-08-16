@@ -1,0 +1,1 @@
+local P={}; function P.step(src,st) local b=0; for _,w in ipairs(st.wounds or {}) do if w.bleeding then b=b+1 end end; if b>0 then st.blood.volume=math.max(0,st.blood.volume-(b*0.5)) else st.blood.volume=math.min(100,st.blood.volume+0.1) end end; return P
