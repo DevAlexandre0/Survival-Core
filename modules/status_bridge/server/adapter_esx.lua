@@ -13,20 +13,30 @@ end
 local function onUseItem(name, cb)
   if GetResourceState('ox_inventory') == 'started' then
     local ox = exports.ox_inventory
-    local register = ox and (ox.RegisterUseableItem or ox.RegisterUsableItem or ox.CreateUseableItem or ox.CreateUsableItem)
-    if register then
-      register(ox, name, function(a, b, c)
-        local src, item, data
-        if type(a) == 'table' then
-          data = a
-          src = a.source or a.playerId
-          item = a.item or b
-        else
-          src, item, data = a, b, c
-        end
-        local ok, err = pcall(cb, src, item, data)
+    if ox and ox.registerHook then
+      ox.registerHook('useItem', function(payload, cont)
+        local src = payload.source or payload.playerId
+        local item = payload.item or payload.name
+        local ok, err = pcall(cb, src, item, payload)
         if not ok then print('[SB][useitem] error:', err) end
-      end)
+        if cont then cont(true) end
+      end, { itemFilter = { name } })
+    else
+      local register = ox and (ox.RegisterUseableItem or ox.RegisterUsableItem or ox.CreateUseableItem or ox.CreateUsableItem)
+      if register then
+        register(ox, name, function(a, b, c)
+          local src, item, data
+          if type(a) == 'table' then
+            data = a
+            src = a.source or a.playerId
+            item = a.item or b
+          else
+            src, item, data = a, b, c
+          end
+          local ok, err = pcall(cb, src, item, data)
+          if not ok then print('[SB][useitem] error:', err) end
+        end)
+      end
     end
   end
 end
