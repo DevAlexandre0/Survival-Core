@@ -13,7 +13,7 @@
 - `status.stress`        (0..100)
 - `status.lung_capacity` (0..100)
 
-> ปรับแมปได้ใน `shared/map.lua` และเปิด/ปิดคีย์ใน `config.lua`.
+> ปรับแมปได้ใน `shared/map.lua` และเปิด/ปิดคีย์ใน `shared/config.lua`.
 
 ## Server API
 - `StatusAPI.get(src, key) -> number|nil`
