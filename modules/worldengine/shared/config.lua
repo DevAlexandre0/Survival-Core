@@ -28,13 +28,13 @@ WORLD_CFG = {
     }
   },
 
-  -- Resources / Looting
+  -- Resources / Looting (consumed by server/resources.lua)
   resources = {
-    limits = {
-      per_player_per_min = 5,
-      per_node_cooldown_s = 50,
-      per_container_lock_s = 10
-    },
+      limits = {
+        per_player_per_min = 5,  -- resource_limit
+        per_node_cooldown_s = 50,
+        per_container_lock_s = 10
+      },
     nodes = {
       mining  = { tools={'pickaxe'},  respawn_min=15*60, respawn_max=45*60, stamina_cost=6 },
       woodcut = { tools={'hatchet'},  respawn_min=10*60, respawn_max=30*60, stamina_cost=5 },
@@ -76,3 +76,4 @@ WORLD_CFG = {
     max_interact_dist = 2.2,
   }
 }
+
