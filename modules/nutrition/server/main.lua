@@ -1,6 +1,7 @@
 -- Spoilage batch tick (เบา)
 CreateThread(function()
-  if not NUT_CFG.enabled or not NUT_CFG.spoil.enabled then return end
+  local cfg = NUT_CFG.spoil
+  if not NUT_CFG.enabled or not (cfg and cfg.enabled) then return end
   print('[Nutrition] server started (spoil batch)')
   while true do
     local amb = { tempC=24.0, humidity=0.55, precip=0.0 }
@@ -11,9 +12,9 @@ CreateThread(function()
     end
 
     local amp = 1.0
-    amp = amp + (amb.tempC - 24.0) * NUT_CFG.spoil.env.temp_amp_per_C
-    amp = amp + (amb.humidity - 0.55) * NUT_CFG.spoil.env.humidity_amp
-    if (amb.precip or 0) > 0.05 then amp = amp + NUT_CFG.spoil.env.rain_bonus end
+    amp = amp + (amb.tempC - 24.0) * cfg.env.temp_amp_per_C
+    amp = amp + (amb.humidity - 0.55) * cfg.env.humidity_amp
+    if (amb.precip or 0) > 0.05 then amp = amp + cfg.env.rain_bonus end
 
     -- วนเฉพาะผู้เล่นออนไลน์: อัปเดตไอเท็มที่มี meta.spoil
     if GetResourceState('ox_inventory') == 'started' then
@@ -24,17 +25,17 @@ CreateThread(function()
           for _,it in pairs(items) do
             local m = it.metadata
             if m and m.spoil ~= nil then
-              local mod = NUT_CFG.spoil.base_rate * amp
-              if m.opened then mod = mod * NUT_CFG.spoil.open_multiplier end
+              local mod = cfg.base_rate * amp
+              if m.opened then mod = mod * cfg.open_multiplier end
               -- ภาชนะ/ชนิดอาหาร
-              if m.container and NUT_CFG.spoil.container_mod[m.container] then
-                mod = mod * NUT_CFG.spoil.container_mod[m.container]
+              if m.container and cfg.container_mod[m.container] then
+                mod = mod * cfg.container_mod[m.container]
               elseif FoodItems[it.name] then
                 local prof = FoodItems[it.name].profile
-                if NUT_CFG.spoil.container_mod[prof] then mod = mod * NUT_CFG.spoil.container_mod[prof] end
+                if cfg.container_mod[prof] then mod = mod * cfg.container_mod[prof] end
               end
 
-              m.spoil = math.min(100, (m.spoil or 0) + mod * (NUT_CFG.spoil.tick_ms/1000))
+              m.spoil = math.min(100, (m.spoil or 0) + mod * (cfg.tick_ms/1000))
               exports.ox_inventory:SetItemMetadata(src, it.name, m)
 
               if m.spoil >= 100 then
@@ -48,7 +49,7 @@ CreateThread(function()
       end
     end
 
-    Wait(NUT_CFG.spoil.tick_ms)
+    Wait(cfg.tick_ms)
   end
 end)
 
