@@ -11,7 +11,7 @@ end
 
 local function skillBonus(src)
   if not VEH_CFG.integration.skill or GetResourceState('skill') ~= 'started' then return 0 end
-  local rank = exports.skill and exports.skill:getRank and (exports.skill:getRank(src,'mechanic') or 0) or 0
+  local rank = exports.skill and exports.skill.getRank and (exports.skill:getRank(src,'mechanic') or 0) or 0
   -- สมมติ rank 0..3 คืน 0..0.15
   return math.min(0.15, 0.05*rank)
 end
