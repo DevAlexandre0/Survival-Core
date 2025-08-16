@@ -11,7 +11,7 @@ local function tryGetESX()
 end
 
 local function onUseItem(name, cb)
-  if GetResourceState('ox_inventory') ~= 'started' then return end
+if GetResourceState('ox_inventory') ~= 'started' then return end
 
   local ox = exports.ox_inventory
   if not ox then return end
