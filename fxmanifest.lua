@@ -12,7 +12,6 @@ shared_scripts {
 }
 
 server_scripts {
-  'modules/_init.lua',
   '@oxmysql/lib/MySQL.lua',
   'core/mod_api.lua',
   'core/db.lua',
@@ -20,6 +19,7 @@ server_scripts {
   'core/audit.lua',
   'core/coalesce.lua',
   'core/save.lua',
+  'modules/_init.lua',
 
   'modules/**/shared/*.lua',
   'modules/**/server/*.lua',
