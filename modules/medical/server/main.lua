@@ -1,4 +1,4 @@
-local P = require 'server/pipeline'
+local P = require 'modules/medical/server/pipeline'
 local Co = require 'core/coalesce'
 
 CreateThread(function()
