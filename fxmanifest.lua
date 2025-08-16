@@ -8,7 +8,8 @@ lua54 'yes'
 
 shared_scripts {
   '@ox_lib/init.lua',
-  'core/config.lua'
+  'core/config.lua',
+  'modules/**/shared/*.lua'
 }
 
 server_scripts {
@@ -20,8 +21,6 @@ server_scripts {
   'core/coalesce.lua',
   'core/save.lua',
   'modules/_init.lua',
-
-  'modules/**/shared/*.lua',
   'modules/**/server/*.lua',
 }
 
@@ -29,8 +28,6 @@ client_scripts {
   'core/mod_client.lua',
   'core/devpanel.lua',
   'core/client_coalesced.lua',
-
-  'modules/**/shared/*.lua',
   'modules/**/client/*.lua'
 }
 
